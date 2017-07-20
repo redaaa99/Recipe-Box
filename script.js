@@ -1,74 +1,87 @@
 
-    var LeaderBoard = React.createClass({
 
-        getInitialState:function(){
-            return{
-                data: []
-            };
-        },
-        componentDidMount(){
-            var that = this;
-            $.getJSON('https://fcctop100.herokuapp.com/api/fccusers/top/alltime', function(response) {
-                that.setState({data: response});
-            });
-        },
-        handleClickLast : function(){
-            var that = this;
-            $.getJSON('https://fcctop100.herokuapp.com/api/fccusers/top/recent', function(response) {
-                that.setState({data: response});
-            });
-        },
+var App = React.createClass({
 
-        handleClickAll : function(){
-            var that = this;
-            $.getJSON('https://fcctop100.herokuapp.com/api/fccusers/top/alltime', function(response) {
-                that.setState({data: response});
-            });
-        },
-        render: function(){
-
-            return (
-					<div id="lessPlease" className="container-fluid">
-						<h1 id="centerMe">LeaderBoard</h1>
-						<table className="table table-inverse table-bordered">
-							<thead>
-							<tr>
-								<th>Rank</th>
-								<th>Camper Name</th>
-								<th id="hoverMe" onClick={this.handleClickLast}>Points In Last 30 Days</th>
-								<th id="hoverMe" onClick={this.handleClickAll}>Points All Time</th>
-							</tr>
-							</thead>
-							<Rows result={this.state.data}/>
-						</table>
-					</div>
-            )
+    getInitialState : function () {
+        return {
+            content: [
+                {
+                    name : "Roasted Balsamic Chicken",
+                    ing : ["Large skinless, boneless chicken breast halves","tablespoon olive oil","cup balsamic vinegar","Clove garlic"]
+                },
+                {
+                    name : "Apricot-Mustard Chicken Sandwiches",
+                    ing : ["cup finely chopped onion","Shredded Chicken Master Recipe","spicy brown mustard"," 1/4 teaspoon cayenne pepper"]
+                },
+                {
+                    name : "No-added sugar blueberry doughnuts",
+                    ing : ["50g plain flour","100ml milk","1 large egg","1tsp Nielsen-Massey Vanilla Extract","115g blueberries"]
+                },
+            ]
         }
-    })
 
-    var Rows = React.createClass({
-        render: function(){
+    },
 
-            if(this.props.result.length==100)
-            {
-                return (
-						<tbody>
-                        {this.props.result.map((item, index) => (
-								<tr id={"lign-"+index.toString()+""} key={index}>
-									<th id="alignVertic" >#&nbsp;{(index+1).toString()}</th>
-									<th id="leftplease"><img id="profilePic" src={item.img} />&nbsp;&nbsp;{item.username}</th>
-									<th id="alignVertic" >{item.recent}</th>
-									<th id="alignVertic" >{item.alltime}</th>
-								</tr>
-                        ))}
-						</tbody>
-                )
-            }
-            return null;
+    render() {
+        return (
+            <div className="container-fluid">
+                <br/>
+                {this.state.content.map(function(item,index){
+                    return (<Recipe key={index} ing={item.ing} >{item.name}</Recipe>)
+                })}
+                <button id="boutton" className="btn"><span className="glyphicon glyphicon-plus-sign"></span> Add a recipe </button>
+            </div>
+        );
+    }
+});
 
+
+var Recipe = React.createClass({
+
+    getInitialState : function () {
+        return {
+            details : false
         }
-    })
-    ReactDOM.render(
-			<LeaderBoard />,
-        document.getElementById('container')
-    )
+    },
+    showDetails : function(){
+        if(this.state.details===true)
+        {
+            this.setState({details:false});
+        }else{
+            this.setState({details:true});
+        }
+    },
+    renderDetails : function (){
+        return (
+            <div id="test">
+                <div id="hoverMePlease" className="well" onClick={this.showDetails}>{this.props.children}</div>
+                    <div id="jquerySlide" className="well-sm" >
+                        <ul>
+                            {this.props.ing.map(function(item,index){
+                                return (<li key={index}>{item}</li>)
+                            })}
+                        </ul>
+                    </div>
+
+            </div>
+
+        );
+    },
+    renderNormal : function () {
+        return (
+            <div id="test">
+                <div id="hoverMePlease" className="well" onClick={this.showDetails} >{this.props.children}</div>
+            </div>
+        );
+    },
+    render() {
+        if(this.state.details===true)
+        {
+            return this.renderDetails();
+        }else{
+            return this.renderNormal();
+        }
+    }
+});
+
+ReactDOM.render(<App/>, document.getElementById("container"));

@@ -1,43 +1,77 @@
 body
- background-color : #444444
- color : white
-#alignVertic
- padding-top: 30px
-#navbar
- background-color: darkgreen
- color : white
- text-align: center
- font-size : 30pt
- font-family: 'Playfair Display', serif
-#centerMe
- text-align: center
- margin-bottom: 40px
- text-decoration: underline
-#leftplease
- text-align: left
-#lessPlease
- width: 70%
- text-align: center
-#profilePic
- width : 80px
- height : 80px
- border-radius : 50%
- border : 2px darkgreen solid
-th
- font-size : 18pt
- text-align : center
- vertical-align : middle
- box-shadow : 1px 1px 5px black
-table
- box-shadow : 5px 2px 30px black
- background : #333
-h1
- font-family : 'Playfair Display', serif
-#hoverMe:hover
- cursor : pointer
- background-color : darkgreen
- box-shadow : 1px 1px 30px green
- transition : all 0.5s ease
-@for $i from 0 through 99
- #lign-#{$i}
-  background-color: darkgreen - $i
+  background-color : rgba(255, 163, 0, 0.48)
+
+  #navbar
+    color: white
+    font-family : monospace
+    font-size : 35pt
+    background-color: #333
+    text-align: center
+    border-bottom: 2px orange solid
+
+  #container
+    margin : 0 auto
+    width: 70%
+    background: #ffa500
+    margin-top: 20px
+    border-radius : 15px
+    box-shadow: 1px 1px 20px #333333
+
+
+.container-fluid > #test > #hoverMePlease:hover
+  box-shadow: 3px 3px 30px #27fc00
+  cursor: pointer
+  font-weight: bold
+
+$hover: #27fc00
+$border-width: 4px
+
+
+#boutton
+  background: none
+  border: none
+  width: 200px
+  height: 50px
+  backface-visibility: hidden
+  padding: 1em 2em
+  padding-left: 10px
+  margin-bottom: 20px
+  margin-top: 20px
+  font-size: 10pt
+  font-weight: 600
+  letter-spacing: .05em
+  text-transform: uppercase
+  color: #F5F5F5
+  transition: color .2s
+  box-shadow: inset 0 0 0 $border-width #F5F5F5, 0 0 1px 1px rgba(black,.25)
+  text-shadow: 0 0 2px rgba(black,.5)
+  position: relative
+  overflow: hidden
+  cursor: pointer!important
+
+  &:before, &:after
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    border: $border-width solid transparent
+    transition: transform .3s ease
+    pointer-events: none
+    box-sizing: border-box
+
+  &:before
+    border-color: $hover transparent
+    transform: skewX(-90deg)
+
+  &:after
+    border-color: transparent $hover
+    transform: skewY(40deg)
+    transition: transform .4s
+
+  &:hover
+    color: $hover
+    &:before, &:after
+      transform: none
+
