@@ -1,4 +1,4 @@
-# FCC-Top100
+# Recipe-Box
 
 ## A Recipe Box Management with React JS and Sass
 
