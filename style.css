@@ -1,3 +1,8 @@
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizelegibility; }
+
 body {
   background-color: rgba(255, 163, 0, 0.48); }
   body #navbar {
@@ -15,10 +20,19 @@ body {
     border-radius: 15px;
     box-shadow: 1px 1px 20px #333333; }
 
-.container-fluid > #test > #hoverMePlease:hover {
-  box-shadow: 3px 3px 30px #27fc00;
+#hoverMePlease {
+  font-size: 15pt; }
+
+#hoverMePlease:hover {
   cursor: pointer;
   font-weight: bold; }
+
+h4#ingredientsTitle {
+  text-align: center;
+  font-size: 20pt;
+  font-family: monospace;
+  text-decoration: underline;
+  padding-bottom: 40px; }
 
 #boutton {
   background: none;
@@ -35,12 +49,12 @@ body {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #F5F5F5;
-  transition: color 0.2s;
+  transition: color 0.1s;
   box-shadow: inset 0 0 0 4px #F5F5F5, 0 0 1px 1px rgba(0, 0, 0, 0.25);
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   position: relative;
   overflow: hidden;
-  cursor: pointer !important; }
+  cursor: pointer; }
   #boutton:before, #boutton:after {
     content: "";
     position: absolute;
@@ -49,19 +63,53 @@ body {
     width: 100%;
     height: 100%;
     border: 4px solid transparent;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
     pointer-events: none;
     box-sizing: border-box; }
   #boutton:before {
-    border-color: #27fc00 transparent;
+    border-color: #000000 transparent;
     transform: skewX(-90deg); }
   #boutton:after {
-    border-color: transparent #27fc00;
+    border-color: transparent #000000;
     transform: skewY(40deg);
-    transition: transform 0.4s; }
+    transition: transform 0.2s; }
   #boutton:hover {
-    color: #27fc00; }
+    color: #000000; }
     #boutton:hover:before, #boutton:hover:after {
       transform: none; }
+
+button#pushLeft {
+  margin-right: 20px; }
+
+#helper {
+  box-shadow: 2px 2px 20px black; }
+
+#ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+
+#li {
+  font: 16pt Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #ccc;
+  width: 278px; }
+
+#li:last-child {
+  border: none; }
+
+#li {
+  text-decoration: none;
+  color: #000;
+  -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+  display: block;
+  width: 100%; }
+
+#li:hover {
+  font-size: 30px;
+  background: #f6f6f6; }
 
 /*# sourceMappingURL=style.css.map */
