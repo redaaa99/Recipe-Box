@@ -1,10 +1,8 @@
+var allRecipes = JSON.parse(localStorage.getItem("_redaaa99_recipes"));
 
-
-var App = React.createClass({
-
-    getInitialState : function () {
-        return {
-            content: [
+if((!allRecipes) || (localStorage["_redaaa99_recipes"]=="") || (localStorage["_redaaa99_recipes"]=="[]") || (typeof(localStorage["_redaaa99_recipes"])==undefined))
+   {
+    allRecipes=[
                 {
                     name : "Roasted Balsamic Chicken",
                     ing : ["Large skinless, Boneless chicken breast halves","Tablespoon olive oil","Cup balsamic vinegar","Clove garlic"]
@@ -18,7 +16,14 @@ var App = React.createClass({
                     ing : ["50g plain flour","100ml milk","1 large egg","1tsp Nielsen-Massey Vanilla Extract","115g blueberries"]
                 },
 
-            ],
+            ]
+ }
+
+var App = React.createClass({
+
+    getInitialState : function () {
+        return {
+            content: allRecipes,
             showingAddRecipe : false,
             editingId : -1
         }
@@ -38,10 +43,13 @@ var App = React.createClass({
                         name: freshRecipe[0],
                         ing: ingredientsTab
                     };
+                    
                     var appArray = this.state.content;
                     appArray[editid]=recipeObject;
+                    
                     this.setState({content: appArray, showingAddRecipe: false, editingId : -1});
                 }
+               this.setState({showingAddRecipe: false,editingId : -1});
             }
             this.setState({showingAddRecipe: false,editingId : -1});
         }
@@ -58,8 +66,11 @@ var App = React.createClass({
                     appArray.push(recipeObject);
                     this.setState({content: appArray, showingAddRecipe: false});
                 }
+               this.setState({showingAddRecipe: false,editingId : -1});
             }
+           this.setState({showingAddRecipe: false,editingId : -1});
         }
+      this.setState({showingAddRecipe: false,editingId : -1});
 
     },
     editPlease : function (id) {
@@ -73,6 +84,7 @@ var App = React.createClass({
         this.setState({content:array})
     },
     render : function (){
+        localStorage.setItem("_redaaa99_recipes",JSON.stringify(this.state.content));
         if(this.state.showingAddRecipe)
         {
             if(this.state.editingId>=0)
